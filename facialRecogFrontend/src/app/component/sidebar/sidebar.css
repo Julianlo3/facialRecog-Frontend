@@ -1,0 +1,29 @@
+#sidedar-up{
+    display: flex;
+}
+
+.title-two{
+    display: inline;
+}
+
+img{
+    width: var(--icon-svg-s);
+    height: var(--icon-svg-s);
+    padding: 10px;
+    margin: 20px;
+    background-color: var(--color-primary);
+    border-radius: 10%;
+}
+
+.component{
+    background-color: var(--gb-primary);
+    min-height: 100vh;
+}
+
+P,li{
+    color: var(--text-primary);
+}
+
+#menu-side-footer{
+  flex: 1;
+}
