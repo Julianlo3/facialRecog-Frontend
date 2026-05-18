@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+    /*BACKGROUND */
+    --gb-primary: #0a1120;
+
+    /*COLOR TEXT */
+    --text-primary: #E2E8F0;
+
+    /*ICONS */
+    --icon-svg-s: 2%;
+
+    /* COLORS */
+    --color-primary: #073042;
+}
+
