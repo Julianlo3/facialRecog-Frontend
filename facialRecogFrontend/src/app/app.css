@@ -1,1 +1,8 @@
+#home{
+    display: flex;
+    min-width: 100vh;
+}
 
+.content{
+    flex: 1;
+}

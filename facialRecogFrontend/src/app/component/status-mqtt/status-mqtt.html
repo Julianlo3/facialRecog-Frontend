@@ -1,0 +1,20 @@
+<h1>ESTADO DE MQTT</h1>
+<p>Canalales a probar</p>
+<ul>
+    <li>ENCENDER LEDS: facialRecog/leds </li>
+</ul>
+
+<h2>Prueba encender apagar leds</h2>
+
+<form (ngSubmit)="sendInputLeds()">
+    <label for="sendLends">Enviar señal: 1 ó 0 </label>
+    <input type="text" name="sendLends" id="sendLends" [(ngModel)] = "inputLed">
+    <button type="submit">Enviar</button>
+</form>
+
+<div>
+<ul>
+    <li>Mensaje de estado LED ROJO: {{statusLedRojo}}</li>
+    <li>Mensaje de estado LED VERDE: {{statusLedVerde}} </li>
+</ul>
+</div>
