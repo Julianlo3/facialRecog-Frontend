@@ -32,6 +32,10 @@ export class Mqtt {
     });
   }
 
+  suscribeUrl(url: string){
+    this.client.suscribe(url);
+  }
+
   publishMessage(topic: string, message: string) {
     this.client.publish(topic, message);
   }
