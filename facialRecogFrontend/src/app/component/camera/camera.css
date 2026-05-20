@@ -1,0 +1,8 @@
+#camera-hud{
+background-color: var(--color-primary);
+color: aliceblue;
+text-align: center;
+margin: 10px;
+border-radius: 10px;
+min-height: 300px;
+}

@@ -1,0 +1,46 @@
+<div id="dashBoard">
+  <div id="dash-top">
+    <p>PANEL DE CONTROL</p>
+    <h1>MONITOR DE ACCESOS</h1>
+
+    <p id="dash-status">{{ status }}</p>
+    <app-clock-time></app-clock-time>
+  </div>
+
+  <div id="dash-cards">
+    <div class="card card-info">
+      <div class="card-title-icon">
+        <h2>Total hoy</h2>
+        <div class="card-body">
+          <p>#</p>
+        </div>
+      </div>
+    </div>
+    <div class="card card-success">
+      <div class="card-title-icon">
+        <h2>Autorizados</h2>
+        <div class="card-body">
+          <p>#</p>
+        </div>
+      </div>
+    </div>
+    <div class="card card-warning">
+      <div class="card-title-icon">
+        <h2>Denegados</h2>
+        <div class="card-body">
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <div class="card card-result">
+      <div class="card-title-icon">
+        <h2>Tasa reconocimiento</h2>
+        <div class="card-body">
+          <p>#</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-camera></app-camera>
+</div>
