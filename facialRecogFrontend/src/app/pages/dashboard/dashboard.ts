@@ -6,7 +6,7 @@ import { Camera } from '../../component/camera/camera';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule,ClockTime,Camera],
+  imports: [ClockTime,Camera],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

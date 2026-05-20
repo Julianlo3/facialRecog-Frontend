@@ -1,20 +1,41 @@
 <h1>ESTADO DE MQTT</h1>
 <p>Canalales a probar</p>
 <ul>
-    <li>ENCENDER LEDS: facialRecog/leds </li>
+  <li>ENCENDER LEDS: facialRecog/leds</li>
 </ul>
 
 <h2>Prueba encender apagar leds</h2>
 
 <form (ngSubmit)="sendInputLeds()">
-    <label for="sendLends">Enviar señal: 1 ó 0 </label>
-    <input type="text" name="sendLends" id="sendLends" [(ngModel)] = "inputLed">
-    <button type="submit">Enviar</button>
+  <label for="sendLends">Enviar señal: 1 ó 0 </label>
+  <input type="text" name="sendLends" id="sendLends" [(ngModel)]="inputLed" />
+  <button type="submit">Enviar</button>
 </form>
 
 <div>
-<ul>
-    <li>Mensaje de estado LED ROJO: {{statusLedRojo}}</li>
-    <li>Mensaje de estado LED VERDE: {{statusLedVerde}} </li>
-</ul>
+  <ul>
+    <li>Mensaje de estado LED ROJO: {{ statusLedRojo }}</li>
+    <li>Mensaje de estado LED VERDE: {{ statusLedVerde }}</li>
+  </ul>
+</div>
+
+<div id="mqtt-sub">
+  <h1>MQTT Registro</h1>
+  <form (ngSubmit)="registerUrlMqtt()"  id="mqtt-sub-register">
+    <label for="urlMQTT">Ruta a suscribirse: </label>
+    <input type="text" placeholder="facialRecog/leds" name="urlMQTT" id="urlMQTT" [(ngModel)]="mqttUrl" />
+    <label for="titleURL">Titulo de la ruta</label>
+    <input type="text" placeholder="Estado led rojo" name="titleURL" id="titleURL" [(ngModel)]="mqttUrlName" />
+    <button type="submit">Registrar</button>
+  </form>
+</div>
+
+<div id="mqtt-cards" >
+  <app-card  *ngFor="let card of cards " 
+  [title]="card.topic"
+  [value]="card.name"
+  [valueMqtt]="card.value"
+  >
+    
+  </app-card>
 </div>
