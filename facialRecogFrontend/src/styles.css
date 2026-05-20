@@ -8,7 +8,12 @@
     /*ICONS */
     --icon-svg-s: 20px;
 
-    /* COLORS */
-    --color-primary: #073042;
+    /* COLORS BACKGROUND*/
+    --color-primary: #08171d;
+    --color-success: #02d192;
+    --color-warning: #ff6467;
+    --color-result: #ffaa0a;
+    --color-info: #00d4c8;
+
 }
 
