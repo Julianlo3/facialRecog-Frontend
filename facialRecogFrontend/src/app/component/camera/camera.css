@@ -1,8 +1,203 @@
-#camera-hud{
-background-color: var(--color-primary);
-color: aliceblue;
-text-align: center;
-margin: 10px;
-border-radius: 10px;
-min-height: 300px;
+.camera-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #04080e;
+  border-radius: 12px;
+  border: var(--border-glow);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
+
+/* HUD Top Bar */
+.camera-hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background-color: rgba(6, 10, 16, 0.9);
+  border-bottom: var(--border-subtle);
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rec-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-error);
+  border-radius: 50%;
+  animation: blink 1s infinite alternate;
+  box-shadow: 0 0 8px var(--color-error);
+}
+
+.hud-title {
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-badge {
+  font-family: monospace;
+  font-size: 0.7rem;
+  background-color: rgba(0, 245, 212, 0.1);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.hud-meta {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Viewport Area */
+.camera-viewport {
+  position: relative;
+  min-height: 380px;
+  background: 
+    linear-gradient(rgba(10, 17, 32, 0.85), rgba(10, 17, 32, 0.95)),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><rect width="60" height="60" fill="none" stroke="%23ffffff" stroke-width="0.5" stroke-opacity="0.04"/></svg>');
+  background-size: cover, auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Scanline and Grid styling */
+.cctv-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 245, 212, 0.3), transparent);
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cctv-noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Corner brackets */
+.bracket {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+.top-left { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.top-right { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+.bottom-right { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+/* Target overlays */
+.face-target {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.target-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.t-line {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.authorized .t-line { border-color: var(--color-success); }
+.unauthorized .t-line { border-color: var(--color-error); }
+
+.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+.br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+.target-info {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(6, 10, 16, 0.85);
+  border: 1px solid;
+  font-family: monospace;
+}
+
+.authorized .target-info {
+  border-color: rgba(0, 230, 118, 0.3);
+  color: var(--color-success);
+}
+
+.unauthorized .target-info {
+  border-color: rgba(255, 23, 68, 0.3);
+  color: var(--color-error);
+}
+
+.target-status {
+  font-size: 0.6rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.target-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.viewport-overlay-footer {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Animations */
+@keyframes blink {
+  from { opacity: 1; }
+  to { opacity: 0.2; }
+}
+
+@keyframes scan {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}

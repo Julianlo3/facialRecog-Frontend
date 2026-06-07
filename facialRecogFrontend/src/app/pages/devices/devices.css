@@ -1,0 +1,236 @@
+.devices-page {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.devices-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.tech-tag {
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.page-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-primary);
+  color: #060a10;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.refresh-btn:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.summary-card {
+  background-color: var(--bg-card);
+  border: var(--border-subtle);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-label {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.summary-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.summary-value.success {
+  color: var(--color-success);
+}
+
+.summary-value.warning {
+  color: var(--color-warning);
+}
+
+.summary-value.error {
+  color: var(--color-error);
+}
+
+.devices-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.state-box {
+  background-color: rgba(13, 22, 38, 0.5);
+  border: var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  padding: 18px;
+}
+
+.state-box.error {
+  color: var(--color-error);
+  border-color: rgba(255, 23, 68, 0.25);
+}
+
+.devices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.device-card {
+  background-color: var(--bg-card);
+  border: var(--border-subtle);
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.device-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.device-type {
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.device-name {
+  margin-top: 4px;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.device-status {
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 6px 8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.device-status.online {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.device-status.offline {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+.device-status.warning {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.device-meta {
+  display: grid;
+  gap: 12px;
+}
+
+.meta-label {
+  display: block;
+  font-family: monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.meta-value {
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  overflow-wrap: anywhere;
+}
+
+.device-detail {
+  border-top: var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  padding-top: 14px;
+}
+
+@media (max-width: 900px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .devices-page {
+    padding: 20px;
+  }
+
+  .devices-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

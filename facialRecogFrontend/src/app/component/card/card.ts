@@ -11,5 +11,5 @@ export class Card {
   @Input() title!: string;
   @Input() value!: string;
   @Input() icon!: string;
-  @Input() valueMqtt!: string;
+  @Input() detail!: string;
 }

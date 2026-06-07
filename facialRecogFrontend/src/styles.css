@@ -1,19 +1,112 @@
-:root{
-    /*BACKGROUND */
-    --gb-primary: #0a1120;
-
-    /*COLOR TEXT */
-    --text-primary: #E2E8F0;
-
-    /*ICONS */
-    --icon-svg-s: 20px;
-
-    /* COLORS BACKGROUND*/
-    --color-primary: #08171d;
-    --color-success: #02d192;
-    --color-warning: #ff6467;
-    --color-result: #ffaa0a;
-    --color-info: #00d4c8;
-
+:root {
+  /* BACKGROUNDS */
+  --bg-app: #080d16;
+  --bg-sidebar: #060a10;
+  --bg-card: rgba(13, 22, 38, 0.6);
+  --bg-card-hover: rgba(18, 30, 51, 0.8);
+  
+  /* BORDERS */
+  --border-glow: 1px solid rgba(0, 245, 212, 0.15);
+  --border-glow-hover: 1px solid rgba(0, 245, 212, 0.35);
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.05);
+  
+  /* TEXT COLORS */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  /* ACCENT COLORS */
+  --color-primary: #00f5d4;        /* Cyan / Neon Teal */
+  --color-primary-glow: rgba(0, 245, 212, 0.2);
+  --color-success: #00e676;        /* Bright Green (Autorizado) */
+  --color-success-bg: rgba(0, 230, 118, 0.1);
+  --color-error: #ff1744;          /* Bright Red (No Autorizado) */
+  --color-error-bg: rgba(255, 23, 68, 0.1);
+  --color-warning: #ff9100;        /* Orange (Restringido) */
+  --color-warning-bg: rgba(255, 145, 0, 0.1);
+  --color-info: #00bbf9;           /* Soft Blue (Visitas) */
+  --color-info-bg: rgba(0, 187, 249, 0.1);
+  
+  /* TRANSITIONS */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
 }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, Segoe UI, Arial, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .title-tech {
+  font-family: Segoe UI, Arial, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Global utility classes for styling badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+.badge-success {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  border-color: rgba(0, 230, 118, 0.2);
+}
+
+.badge-error {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+  border-color: rgba(255, 23, 68, 0.2);
+}
+
+.badge-warning {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+  border-color: rgba(255, 145, 0, 0.2);
+}
+
+.badge-info {
+  background-color: var(--color-info-bg);
+  color: var(--color-info);
+  border-color: rgba(0, 187, 249, 0.2);
+}
+
 

@@ -1,35 +1,77 @@
-<div class="component">
-<div id="sidedar-up">
-    <img src="icons/camera.svg" alt="Camera icon">
-    <div class="title-two">
-        <p class="title">FACEGUARD</p>
-        <p class="title-secundary">Control version</p>
+<div class="sidebar">
+  <!-- Top Logo Section -->
+  <div class="sidebar-header">
+    <div class="logo-box">
+      <svg class="icon-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+        <circle cx="12" cy="13" r="4"></circle>
+      </svg>
     </div>
+    <div class="logo-text">
+      <span class="logo-title">FACEGUARD</span>
+      <span class="logo-subtitle">CONTROL v2.4</span>
+    </div>
+  </div>
+
+  <!-- Navigation Section -->
+  <div class="sidebar-section">
+    <span class="section-label">NAVEGACIÓN</span>
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a routerLink="/DASHBOARD" routerLinkActive="active" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="9"></rect>
+              <rect x="14" y="3" width="7" height="5"></rect>
+              <rect x="14" y="12" width="7" height="9"></rect>
+              <rect x="3" y="16" width="7" height="5"></rect>
+            </svg>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/USERS" routerLinkActive="active" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span>Gestionar Usuarios</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/DEVICES" routerLinkActive="active" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+              <line x1="8" y1="22" x2="16" y2="22"></line>
+              <line x1="12" y1="18" x2="12" y2="22"></line>
+            </svg>
+            <span>Dispositivos</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- System Status Section -->
+  <div class="sidebar-status">
+    <span class="section-label">ESTADO DEL SISTEMA</span>
+    <div class="status-grid">
+      <div class="status-row">
+        <span class="status-label">Cámaras</span>
+        <span class="status-value success">4/4</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Modelo IA</span>
+        <span class="status-value success">v3.1</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Base datos</span>
+        <span class="status-value success">SYNC</span>
+      </div>
+    </div>
+  </div>
 </div>
 
-
-<div id="nav">
-<hr>
-<p class="title">Navegación</p>
-
-<div id="menu-side-up">
-<nav class="menu-side">
-    <ul>
-        <li><a routerLink="/DASHBOARD">DashBoard</a></li>
-        <li>Gestionar Usuarios</li>
-        <li><a routerLink="/MQTT">Estado de MQTT</a></li>
-    </ul>
-</nav>
-</div>
-
-<div id="menu-side-footer">
-<hr>
-<p class="title">Estado del sistema</p>
-<p>Cámaras: </p>
-<p>Modelo IA: </p>
-<p>Base de datos:</p>
-</div>
-
-</div>
-</div>
 
