@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DeviceDto, DeviceSummaryDto, DeviceStatus } from '../../models/device.dto';
 import { Devices as DevicesService } from '../../services/devices';
+import { Mqtt } from '../../services/MQTT/mqtt';
 
 @Component({
   selector: 'app-devices',
@@ -21,10 +22,13 @@ export class Devices implements OnInit {
   loading = true;
   error = '';
 
-  constructor(private devicesService: DevicesService) {}
+  constructor(private devicesService: DevicesService, private mqtt: Mqtt) {}
 
   ngOnInit() {
     this.loadDevices();
+    this.mqtt.messages$.subscribe(data => {
+      console.log(data);
+    })
   }
 
   loadDevices() {
@@ -47,7 +51,7 @@ export class Devices implements OnInit {
   getStatusLabel(status: DeviceStatus): string {
     const labels: Record<DeviceStatus, string> = {
       online: 'Activo',
-      offline: 'Sin conexion',
+      offline: 'Sin conexión',
       warning: 'Alerta',
     };
 
@@ -57,14 +61,29 @@ export class Devices implements OnInit {
   getTypeLabel(type: DeviceDto['type']): string {
     const labels: Record<DeviceDto['type'], string> = {
       pir: 'Sensor PIR',
-      camera: 'Camara',
+      camera: 'Cámara',
       raspberry: 'Raspberry Pi',
       yolo: 'YOLO',
       database: 'Base de datos',
+      servo: 'Servo',
+      led: 'LED',
+      service: 'Servicio',
       other: 'Otro',
     };
 
     return labels[type];
+  }
+
+  formatCurrentValue(value: DeviceDto['currentValue']): string {
+    if (value === undefined || value === null || value === '') {
+      return 'Sin datos';
+    }
+
+    if (typeof value === 'boolean') {
+      return value ? 'Encendido' : 'Apagado';
+    }
+
+    return String(value);
   }
 
   private buildSummary(devices: DeviceDto[]): DeviceSummaryDto {

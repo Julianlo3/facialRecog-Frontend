@@ -7,7 +7,7 @@ import { DeviceDto, DeviceSummaryDto } from '../models/device.dto';
   providedIn: 'root',
 })
 export class Devices {
-  private readonly apiUrl = '/api/devices';
+  private readonly apiUrl = 'http://localhost:8000/api/devices';
 
   constructor(private http: HttpClient) {}
 
