@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DeviceDto, DeviceSummaryDto, DeviceStatus } from '../../models/device.dto';
-import { Devices as DevicesService } from '../../services/devices';
+import { Devices as DevicesService } from '../../services/http/devices';
 import { Mqtt } from '../../services/MQTT/mqtt';
 
 @Component({
