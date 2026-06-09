@@ -1,29 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { enviroment } from '../../env';
+import { PersonDTOResponse } from '../../models/personDTOResponse';
 import { personDTO } from '../../models/person.dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Person {
-  private readonly apiUrl = 'http://192.168.1.66:8000/api/person';
+  private readonly apiUrl = `${enviroment.bdo}`;
 
   constructor(private http: HttpClient) {}
 
-  getPersons(): Observable<personDTO[]> {
-    return this.http.get<personDTO[]>(this.apiUrl);
+  getPersons(): Observable<PersonDTOResponse[]> {
+    return this.http.get<PersonDTOResponse[]>(this.apiUrl);
   }
 
-  createPerson(person: personDTO, photo: File): Observable<any> {
+  createPerson(person: personDTO, image: File) {
     const formData = new FormData();
 
-    formData.append('name', person.name);
+    formData.append('nombre', person.nombre);
 
-    formData.append('access', String(person.access));
+    formData.append('nivelAcceso', person.nivelAcceso);
 
-    formData.append('photo', photo);
+    formData.append('imagen', image);
 
-    return this.http.post(this.apiUrl, formData);
+    return this.http.post(this.apiUrl+"/crear/", formData);
   }
 }

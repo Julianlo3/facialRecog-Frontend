@@ -25,16 +25,24 @@
   <!-- Stats Indicators Row -->
   <section class="users-stats-bar">
     <div class="stat-indicator">
-      <span class="indicator-label">TOTAL REGISTRADOS</span>
-      <span class="indicator-val cyan">8</span>
+      <span class="indicator-label"> TOTAL REGISTRADOS </span>
+      <span class="indicator-val cyan">
+        {{ totalUsers }}
+      </span>
     </div>
+
     <div class="stat-indicator border-left">
-      <span class="indicator-label">ACTIVOS</span>
-      <span class="indicator-val green">7</span>
+      <span class="indicator-label"> ACTIVOS </span>
+      <span class="indicator-val green">
+        {{ activeUsers }}
+      </span>
     </div>
+
     <div class="stat-indicator border-left">
-      <span class="indicator-label">INACTIVOS</span>
-      <span class="indicator-val red">1</span>
+      <span class="indicator-label"> INACTIVOS </span>
+      <span class="indicator-val red">
+        {{ inactiveUsers }}
+      </span>
     </div>
   </section>
 
@@ -51,68 +59,80 @@
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
+
       <input
         type="text"
-        placeholder="Buscar por nombre, departamento o email..."
+        placeholder="Buscar usuario..."
         class="search-input"
+        [(ngModel)]="searchText"
       />
     </div>
 
     <div class="filter-group">
-      <button class="filter-btn active">TODOS</button>
-      <button class="filter-btn">ACTIVOS</button>
-      <button class="filter-btn">INACTIVOS</button>
+      <button
+        class="filter-btn"
+        [class.active]="selectedFilter === 'ALL'"
+        (click)="selectedFilter = 'ALL'"
+      >
+        TODOS
+      </button>
+
+      <button
+        class="filter-btn"
+        [class.active]="selectedFilter === 'ACTIVE'"
+        (click)="selectedFilter = 'ACTIVE'"
+      >
+        ACTIVOS
+      </button>
+
+      <button
+        class="filter-btn"
+        [class.active]="selectedFilter === 'INACTIVE'"
+        (click)="selectedFilter = 'INACTIVE'"
+      >
+        INACTIVOS
+      </button>
     </div>
   </section>
 
-  <!-- Users Grid list -->
+  <!-- Users Grid -->
   <section class="users-grid">
-    @for (user of users; track user.name) {
+    @for (person of filteredPersons; track person.id) {
       <div class="user-card">
         <div class="card-top">
-          <!-- Profile Pic with status dot -->
           <div class="avatar-container">
-            <img [src]="user.avatar" [alt]="user.name" class="user-avatar" />
-            <span class="status-dot" [class.active]="user.active"></span>
+            <img [src]="person.imagen" [alt]="person.nombre" class="user-avatar" />
+
+            <span class="status-dot" [class.active]="person.nivelAcceso"> </span>
           </div>
-          <!-- Profile Info -->
+
           <div class="user-info">
-            <h3 class="user-name">{{ user.name }}</h3>
-            <span class="user-role">{{ user.role }}</span>
-            <span class="user-dept">{{ user.dept }}</span>
+            <h3 class="user-name">
+              {{ person.nombre }}
+            </h3>
+
+            <span class="user-role"> Usuario Registrado </span>
+
+            <span class="user-dept">
+              {{ person.nivelAcceso ? 'Activo' : 'Inactivo' }}
+            </span>
           </div>
         </div>
 
         <div class="card-bottom">
-          <!-- Access level Badge -->
           <span
             class="badge"
-            [class.badge-success]="user.access === 'ACCESO TOTAL'"
-            [class.badge-warning]="user.access === 'RESTRINGIDO'"
-            [class.badge-info]="user.access === 'VISITANTE'"
+            [class.badge-success]="person.nivelAcceso"
+            [class.badge-warning]="!person.nivelAcceso"
           >
-            {{ user.access }}
+            {{ person.nivelAcceso ? 'ACCESO TOTAL' : 'RESTRINGIDO' }}
           </span>
-
-          <!-- Last Seen time -->
-          <div class="last-seen">
-            <svg
-              class="clock-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-            <span>{{ user.time }}</span>
-          </div>
         </div>
       </div>
+    } @empty {
+      <div class="empty-state">No hay usuarios registrados.</div>
     }
   </section>
-
   @if (showModal()) {
     <div class="modal-overlay" (click)="closeModal()">
       ```
@@ -190,7 +210,7 @@
               type="text"
               class="form-input"
               placeholder="Ej: María González López"
-              [(ngModel)]="person.name"
+              [(ngModel)]="person.nombre"
               name="name"
             />
           </div>
@@ -199,7 +219,7 @@
             <label class="field-label"> NIVEL DE ACCESO </label>
 
             <div class="select-wrapper">
-              <select class="form-select" [(ngModel)]="person.access" name="access">
+              <select class="form-select" [(ngModel)]="person.nivelAcceso" name="access">
                 <option [ngValue]="true">Acceso Total</option>
 
                 <option [ngValue]="false">Restringido</option>

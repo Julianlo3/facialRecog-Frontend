@@ -1,6 +1,5 @@
 export interface personDTO{
-    id: string;
-    name: string;
-    access: string;
-    photo: string;
+    nombre: string;
+    nivelAcceso: string;
+    imagen: File | null;
 }

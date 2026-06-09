@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DeviceDto, DeviceSummaryDto, DeviceStatus } from '../../models/device.dto';
 import { Devices as DevicesService } from '../../services/http/devices';
 import { Mqtt } from '../../services/MQTT/mqtt';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-devices',
@@ -22,9 +23,12 @@ export class Devices implements OnInit {
   loading = true;
   error = '';
 
-  constructor(private devicesService: DevicesService, private mqtt: Mqtt) {}
+  constructor(private devicesService: DevicesService, private mqtt: Mqtt
+    , private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
+    console.log("devices iniciando");
     this.loadDevices();
     this.mqtt.messages$.subscribe(data => {
       console.log(data);
@@ -40,10 +44,12 @@ export class Devices implements OnInit {
         this.devices = devices;
         this.summary = this.buildSummary(devices);
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.error = 'No se pudo consultar el estado de dispositivos.';
         this.loading = false;
+        this.cdr.detectChanges();
       },
     });
   }
@@ -63,7 +69,6 @@ export class Devices implements OnInit {
       pir: 'Sensor PIR',
       camera: 'Cámara',
       raspberry: 'Raspberry Pi',
-      yolo: 'YOLO',
       database: 'Base de datos',
       servo: 'Servo',
       led: 'LED',
