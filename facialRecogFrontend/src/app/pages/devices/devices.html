@@ -2,7 +2,7 @@
   <header class="devices-header">
     <div>
       <span class="tech-tag">MONITOREO</span>
-      <h1 class="page-title">Estado de Dispositivos</h1>
+      <h1 class="page-title">Estado de dispositivos</h1>
     </div>
 
     <button class="refresh-btn" type="button" (click)="loadDevices()" [disabled]="loading">
@@ -30,7 +30,7 @@
       <span class="summary-value warning">{{ summary.warning }}</span>
     </div>
     <div class="summary-card">
-      <span class="summary-label">SIN CONEXION</span>
+      <span class="summary-label">SIN CONEXIÓN</span>
       <span class="summary-value error">{{ summary.offline }}</span>
     </div>
   </section>
@@ -38,7 +38,7 @@
   <section class="devices-section">
     <div class="section-header">
       <span class="tech-tag">PIPELINE</span>
-      <h2 class="section-title">Raspberry Pi 5 y perifericos</h2>
+      <h2 class="section-title">Raspberry Pi 5, sensores y actuadores</h2>
     </div>
 
     <div class="state-box" *ngIf="loading">Consultando dispositivos...</div>
@@ -65,11 +65,19 @@
             <span class="meta-value">{{ device.id }}</span>
           </div>
           <div>
-            <span class="meta-label">Ubicacion</span>
+            <span class="meta-label">Estado actual</span>
+            <span class="meta-value">{{ formatCurrentValue(device.currentValue) }}</span>
+          </div>
+          <div *ngIf="device.gpio !== undefined">
+            <span class="meta-label">GPIO</span>
+            <span class="meta-value">{{ device.gpio }}</span>
+          </div>
+          <div>
+            <span class="meta-label">Ubicación</span>
             <span class="meta-value">{{ device.location || 'Sin asignar' }}</span>
           </div>
           <div>
-            <span class="meta-label">Ultimo reporte</span>
+            <span class="meta-label">Último reporte</span>
             <span class="meta-value">{{ device.lastSeen || 'Sin datos' }}</span>
           </div>
         </div>

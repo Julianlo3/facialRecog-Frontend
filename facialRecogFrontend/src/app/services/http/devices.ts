@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { DeviceDto, DeviceSummaryDto } from '../models/device.dto';
+import { DeviceDto, DeviceSummaryDto } from '../../models/device.dto';
+import { enviroment } from '../../env';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Devices {
-  private readonly apiUrl = '/api/devices';
+  private readonly apiUrl = `${enviroment.api}/devices`;
 
   constructor(private http: HttpClient) {}
 

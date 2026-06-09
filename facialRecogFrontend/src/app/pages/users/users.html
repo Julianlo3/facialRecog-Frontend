@@ -7,7 +7,13 @@
     </div>
     <div class="header-right">
       <button class="add-user-btn" (click)="openModal()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="btn-icon">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          class="btn-icon"
+        >
           <line x1="12" y1="5" x2="12" y2="19"></line>
           <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
@@ -19,86 +25,125 @@
   <!-- Stats Indicators Row -->
   <section class="users-stats-bar">
     <div class="stat-indicator">
-      <span class="indicator-label">TOTAL REGISTRADOS</span>
-      <span class="indicator-val cyan">8</span>
+      <span class="indicator-label"> TOTAL REGISTRADOS </span>
+      <span class="indicator-val cyan">
+        {{ totalUsers }}
+      </span>
     </div>
+
     <div class="stat-indicator border-left">
-      <span class="indicator-label">ACTIVOS</span>
-      <span class="indicator-val green">7</span>
+      <span class="indicator-label"> ACTIVOS </span>
+      <span class="indicator-val green">
+        {{ activeUsers }}
+      </span>
     </div>
+
     <div class="stat-indicator border-left">
-      <span class="indicator-label">INACTIVOS</span>
-      <span class="indicator-val red">1</span>
+      <span class="indicator-label"> INACTIVOS </span>
+      <span class="indicator-val red">
+        {{ inactiveUsers }}
+      </span>
     </div>
   </section>
 
   <!-- Search and Filtering Section -->
   <section class="controls-section">
     <div class="search-box">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg
+        class="search-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input type="text" placeholder="Buscar por nombre, departamento o email..." class="search-input">
+
+      <input
+        type="text"
+        placeholder="Buscar usuario..."
+        class="search-input"
+        [(ngModel)]="searchText"
+      />
     </div>
 
     <div class="filter-group">
-      <button class="filter-btn active">TODOS</button>
-      <button class="filter-btn">ACTIVOS</button>
-      <button class="filter-btn">INACTIVOS</button>
+      <button
+        class="filter-btn"
+        [class.active]="selectedFilter === 'ALL'"
+        (click)="selectedFilter = 'ALL'"
+      >
+        TODOS
+      </button>
+
+      <button
+        class="filter-btn"
+        [class.active]="selectedFilter === 'ACTIVE'"
+        (click)="selectedFilter = 'ACTIVE'"
+      >
+        ACTIVOS
+      </button>
+
+      <button
+        class="filter-btn"
+        [class.active]="selectedFilter === 'INACTIVE'"
+        (click)="selectedFilter = 'INACTIVE'"
+      >
+        INACTIVOS
+      </button>
     </div>
   </section>
 
-  <!-- Users Grid list -->
+  <!-- Users Grid -->
   <section class="users-grid">
-    @for (user of users; track user.name) {
+    @for (person of filteredPersons; track person.id) {
       <div class="user-card">
         <div class="card-top">
-          <!-- Profile Pic with status dot -->
           <div class="avatar-container">
-            <img [src]="user.avatar" [alt]="user.name" class="user-avatar">
-            <span class="status-dot" [class.active]="user.active"></span>
+            <img [src]="person.imagen" [alt]="person.nombre" class="user-avatar" />
+
+            <span class="status-dot" [class.active]="person.nivelAcceso"> </span>
           </div>
-          <!-- Profile Info -->
+
           <div class="user-info">
-            <h3 class="user-name">{{ user.name }}</h3>
-            <span class="user-role">{{ user.role }}</span>
-            <span class="user-dept">{{ user.dept }}</span>
+            <h3 class="user-name">
+              {{ person.nombre }}
+            </h3>
+
+            <span class="user-role"> Usuario Registrado </span>
+
+            <span class="user-dept">
+              {{ person.nivelAcceso ? 'Activo' : 'Inactivo' }}
+            </span>
           </div>
         </div>
 
         <div class="card-bottom">
-          <!-- Access level Badge -->
-          <span class="badge" 
-                [class.badge-success]="user.access === 'ACCESO TOTAL'"
-                [class.badge-warning]="user.access === 'RESTRINGIDO'"
-                [class.badge-info]="user.access === 'VISITANTE'">
-            {{ user.access }}
+          <span
+            class="badge"
+            [class.badge-success]="person.nivelAcceso"
+            [class.badge-warning]="!person.nivelAcceso"
+          >
+            {{ person.nivelAcceso ? 'ACCESO TOTAL' : 'RESTRINGIDO' }}
           </span>
-
-          <!-- Last Seen time -->
-          <div class="last-seen">
-            <svg class="clock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-            <span>{{ user.time }}</span>
-          </div>
         </div>
       </div>
+    } @empty {
+      <div class="empty-state">No hay usuarios registrados.</div>
     }
   </section>
-
-  <!-- Registration Modal (Second Screen) -->
   @if (showModal()) {
     <div class="modal-overlay" (click)="closeModal()">
+      ```
       <div class="modal-box" (click)="$event.stopPropagation()">
-        <!-- Header -->
         <div class="modal-header">
           <div class="header-titles">
-            <span class="modal-tech-tag">SISTEMA DE CONTROL</span>
+            <span class="modal-tech-tag"> SISTEMA DE CONTROL </span>
+
             <h2 class="modal-title">Registrar Nuevo Usuario</h2>
           </div>
+
           <button class="close-btn" (click)="closeModal()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -107,74 +152,97 @@
           </button>
         </div>
 
-        <!-- Form Body -->
         <form class="modal-form">
-          <!-- Photo Upload Area -->
           <div class="photo-upload-container">
             <div class="photo-upload-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="upload-camera-icon">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                <circle cx="12" cy="13" r="4"></circle>
-              </svg>
-              <span class="upload-label">FOTO</span>
+              @if (previewUrl) {
+                <img [src]="previewUrl" class="photo-preview" alt="Vista previa" />
+              } @else {
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  class="upload-camera-icon"
+                >
+                  <path
+                    d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                  ></path>
+
+                  <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+
+                <span class="upload-label"> FOTO </span>
+              }
             </div>
+
             <div class="photo-upload-meta">
               <h4 class="upload-title">Foto de registro</h4>
-              <p class="upload-description">Sube una fotografía nítida del rostro. Se utilizará como referencia para el reconocimiento facial.</p>
+
+              <p class="upload-description">Sube una fotografía nítida del rostro.</p>
+
               <label class="upload-trigger">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="trigger-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  class="trigger-icon"
+                >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+
                   <polyline points="17 8 12 3 7 8"></polyline>
+
                   <line x1="12" y1="3" x2="12" y2="15"></line>
                 </svg>
-                <span>Seleccionar archivo</span>
-                <input type="file" style="display: none;">
+
+                <span> Seleccionar archivo </span>
+
+                <input type="file" accept="image/*" hidden (change)="onFileSelected($event)" />
               </label>
             </div>
           </div>
 
-          <!-- Input Fields -->
           <div class="form-group">
-            <label class="field-label">NOMBRE COMPLETO *</label>
-            <input type="text" placeholder="Ej: María González López" class="form-input">
+            <label class="field-label"> NOMBRE COMPLETO * </label>
+
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Ej: María González López"
+              [(ngModel)]="person.nombre"
+              name="name"
+            />
           </div>
 
           <div class="form-group">
-            <label class="field-label">CORREO ELECTRÓNICO *</label>
-            <input type="email" placeholder="usuario@empresa.com" class="form-input">
-          </div>
+            <label class="field-label"> NIVEL DE ACCESO </label>
 
-          <!-- Row Group (Dept and Role) -->
-          <div class="form-row">
-            <div class="form-group flex-1">
-              <label class="field-label">DEPARTAMENTO</label>
-              <input type="text" placeholder="Ej: Ingeniería" class="form-input">
-            </div>
-            <div class="form-group flex-1">
-              <label class="field-label">CARGO</label>
-              <input type="text" placeholder="Ej: Analista Senior" class="form-input">
-            </div>
-          </div>
-
-          <!-- Dropdown level of access -->
-          <div class="form-group">
-            <label class="field-label">NIVEL DE ACCESO</label>
             <div class="select-wrapper">
-              <select class="form-select">
-                <option value="restringido">Restringido — áreas asignadas</option>
-                <option value="total">Acceso Total</option>
-                <option value="visitante">Visitante</option>
+              <select class="form-select" [(ngModel)]="person.nivelAcceso" name="access">
+                <option [ngValue]="true">Acceso Total</option>
+
+                <option [ngValue]="false">Restringido</option>
               </select>
-              <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+              <svg
+                class="select-arrow"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </div>
           </div>
 
-          <!-- Actions buttons -->
           <div class="form-actions">
             <button type="button" class="cancel-btn" (click)="closeModal()">Cancelar</button>
-            <button type="submit" class="submit-btn" (click)="$event.preventDefault()">REGISTRAR USUARIO</button>
+
+            <button type="button" class="submit-btn" (click)="savePerson()">
+              REGISTRAR USUARIO
+            </button>
           </div>
         </form>
       </div>
