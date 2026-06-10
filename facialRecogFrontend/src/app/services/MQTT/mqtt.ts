@@ -14,7 +14,7 @@ export class Mqtt {
   }>();
 
   constructor() {
-    this.client = mqtt.connect('ws://192.168.1.66:9001');
+    this.client = mqtt.connect('ws://82.25.92.68:9001');
 
     this.client.on('connect', () => {
       console.log('MQTT conectado');
