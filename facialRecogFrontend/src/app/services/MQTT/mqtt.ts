@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class Mqtt {
-
   private client: any;
 
   public messages$ = new Subject<{
@@ -15,52 +14,40 @@ export class Mqtt {
   }>();
 
   constructor() {
-
-    this.client = mqtt.connect(
-      'ws://192.168.1.66:9001'
-    );
+    this.client = mqtt.connect('ws://192.168.1.66:9001');
 
     this.client.on('connect', () => {
-
       console.log('MQTT conectado');
 
-      this.client.subscribe(
-        'facialRecog/state'
-      );
+      this.client.subscribe('facialRecog/state');
 
+      this.client.subscribe('facialRecog/events');
     });
 
-    this.client.on(
-      'message',
-      (
-        topic: string,
-        message: Buffer
-      ) => {
+    this.client.on('message', (topic: string, message: Buffer) => {
+      try {
+        const payload = JSON.parse(message.toString());
 
-        try {
-
-          const payload =
-            JSON.parse(
-              message.toString()
-            );
-
-          this.messages$.next({
-            topic,
-            payload
-          });
-
-        } catch {
-
-          this.messages$.next({
-            topic,
-            payload:
-              message.toString()
-          });
-
-        }
-
+        this.messages$.next({
+          topic,
+          payload,
+        });
+      } catch {
+        this.messages$.next({
+          topic,
+          payload: message.toString(),
+        });
       }
-    );
+    });
   }
 
+  publish(topic: string, payload: any): void {
+    if (!this.client || !this.client.connected) {
+      console.error('MQTT no conectado');
+
+      return;
+    }
+
+    this.client.publish(topic, JSON.stringify(payload));
+  }
 }

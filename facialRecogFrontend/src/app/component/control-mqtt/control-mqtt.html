@@ -1,0 +1,129 @@
+<section class="controls-header">
+
+  <h2>Control de Dispositivos</h2>
+
+  <p>
+    Gestión manual de sensores y actuadores del sistema.
+  </p>
+
+</section>
+
+<section class="controls-grid">
+
+  <!-- LED Azul -->
+  <div class="control-card">
+
+    <h3>LED Azul</h3>
+
+    <span class="device-type">
+      Actuador
+    </span>
+
+    <div class="actions">
+
+      <button
+        class="btn-on"
+        (click)="controlDevice('ledBlue','on')"
+      >
+        Encender
+      </button>
+
+      <button
+        class="btn-off"
+        (click)="controlDevice('ledBlue','off')"
+      >
+        Apagar
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- LED Amarillo -->
+  <div class="control-card">
+
+    <h3>LED Amarillo</h3>
+
+    <span class="device-type">
+      Actuador
+    </span>
+
+    <div class="actions">
+
+      <button
+        class="btn-on"
+        (click)="controlDevice('ledYellow','on')"
+      >
+        Encender
+      </button>
+
+      <button
+        class="btn-off"
+        (click)="controlDevice('ledYellow','off')"
+      >
+        Apagar
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- LED Rojo -->
+  <div class="control-card">
+
+    <h3>LED Rojo</h3>
+
+    <span class="device-type">
+      Actuador
+    </span>
+
+    <div class="actions">
+
+      <button
+        class="btn-on"
+        (click)="controlDevice('ledRed','on')"
+      >
+        Encender
+      </button>
+
+      <button
+        class="btn-off"
+        (click)="controlDevice('ledRed','off')"
+      >
+        Apagar
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Servo -->
+  <div class="control-card">
+
+    <h3>Puerta</h3>
+
+    <span class="device-type">
+      Servo Motor
+    </span>
+
+    <div class="actions">
+
+      <button
+        class="btn-on"
+        (click)="controlDevice('servo01','on')"
+      >
+        Abrir
+      </button>
+
+      <button
+        class="btn-off"
+        (click)="controlDevice('servo01','off')"
+      >
+        Cerrar
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
