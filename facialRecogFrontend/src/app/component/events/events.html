@@ -1,0 +1,50 @@
+<section class="logs-container">
+
+  <div class="logs-header">
+    <h3>Eventos del Sistema</h3>
+    <span>{{ logs.length }} registros</span>
+  </div>
+
+  <div class="logs-table-wrapper">
+
+    <table class="logs-table">
+
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Dispositivo</th>
+          <th>Evento</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (log of logs; track $index) {
+
+          <tr>
+
+            <td class="timestamp">
+              {{ log.timestamp }}
+            </td>
+
+            <td>
+              <span class="device-badge">
+                {{ log.device }}
+              </span>
+            </td>
+
+            <td>
+              {{ log.message }}
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>

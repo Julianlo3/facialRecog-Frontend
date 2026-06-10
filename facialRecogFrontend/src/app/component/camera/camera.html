@@ -17,11 +17,23 @@
     <div class="cctv-grid"></div>
     <div class="cctv-scanline"></div>
     <div class="cctv-noise"></div>
+    <img src={{camera}}>
+
+    <div class="capture-section">
+
+    <h2>Última captura</h2>
+
+    <img
+      [src]="captureUrl"
+      alt="Última captura"
+    >
+
+  </div>
     
     <!-- Target Corner Bracket Marks -->
     <div class="bracket top-left"></div>
     <div class="bracket top-right"></div>
     <div class="bracket bottom-left"></div>
     <div class="bracket bottom-right"></div>
-    <img src={{camera}}>
+    
 </div>
